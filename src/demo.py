@@ -4,6 +4,9 @@ from __future__ import print_function
 
 import _init_paths
 
+import sys
+sys.path.append("./lib/model/networks/DCNv2")
+
 import os
 import sys
 import cv2
@@ -40,18 +43,18 @@ def demo(opt):
               image_names.append(os.path.join(opt.demo, file_name))
     else:
       image_names = [opt.demo]
-
+#  print(is_video)
   # Initialize output video
   out = None
   out_name = opt.demo[opt.demo.rfind('/') + 1:]
   print('out_name', out_name)
   if opt.save_video:
     # fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    fourcc = cv2.VideoWriter_fourcc(*'H264')
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     out = cv2.VideoWriter('../results/{}.mp4'.format(
       opt.exp_id + '_' + out_name),fourcc, opt.save_framerate, (
         opt.video_w, opt.video_h))
-  
+#    print(opt.exp_id, opt.save_framerate, opt.video_w, opt.video_h)
   if opt.debug < 5:
     detector.pause = False
   cnt = 0
@@ -60,6 +63,7 @@ def demo(opt):
   while True:
       if is_video:
         _, img = cam.read()
+#        print(img)
         if img is None:
           save_and_exit(opt, out, results, out_name)
       else:
@@ -70,14 +74,14 @@ def demo(opt):
       cnt += 1
 
       # resize the original video for saving video results
-      if opt.resize_video:
+      if opt.resize_video or opt.save_video:
         img = cv2.resize(img, (opt.video_w, opt.video_h))
 
       # skip the first X frames of the video
       if cnt < opt.skip_first:
         continue
       
-      cv2.imshow('input', img)
+#      cv2.imshow('input', img)
 
       # track or detect the image.
       ret = detector.run(img)
@@ -102,6 +106,7 @@ def demo(opt):
       if cv2.waitKey(1) == 27:
         save_and_exit(opt, out, results, out_name)
         return 
+  out.release()
   save_and_exit(opt, out, results)
 
 

@@ -15,6 +15,8 @@ import torch.utils.model_zoo as model_zoo
 
 from .base_model import BaseModel
 
+import sys
+sys.path.append("./DCNv2")
 try:
     from .DCNv2.dcn_v2 import DCN
 except:
