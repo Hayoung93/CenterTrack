@@ -5,6 +5,7 @@ run example: `python demo.py tracking --load_model ../videos/coco_tracking.pth -
 Please refer to `xingyizhou/CenterTrack` for installation & etc., but it will cause some problem.
 
 My suggestion (seaching among opened/closed issues):
+
 install torch 1.4.0+cu100, torchvision 0.5.0+cu100 with pip
 
 install DCNv2, following guide from original repo
