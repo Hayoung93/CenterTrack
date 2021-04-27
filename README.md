@@ -6,7 +6,11 @@ Please refer to `xingyizhou/CenterTrack` for installation & etc., but it will ca
 
 My suggestion (seaching among opened/closed issues):
 install torch 1.4.0+cu100, torchvision 0.5.0+cu100 with pip
+
 install DCNv2, following guide from original repo
+
 re-install cv2
+
 (also you might need to run apt install libgl1-mesa-glx, apt install libglib2.0-0)
+
 run for demo! I believe that you can handle minor errors :)
